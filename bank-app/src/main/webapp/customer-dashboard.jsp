@@ -14,20 +14,19 @@
 <body>
 	<%if(request.getParameter("username")!=null)customer =  service.getCustomerByUserName(request.getParameter("username"));%>
         <h1>Welcome To Customer Dashboard</h1>
-        <h1><c:out value="<%=session.getAttribute("custName")%>"/></h1>
-        <h1><c:out value="<%=session.getAttribute("custAcc")%>"/></h1>
-        <h1><c:out value="<%=session.getAttribute("custMobile")%>"/></h1>
+        <h3><c:out value="<%=session.getAttribute(\"custName\")%>"/></h3>
+        <h3><c:out value="<%=session.getAttribute(\"custAcc\")%>"/></h3>
+        <h3><c:out value="<%=session.getAttribute(\"custMobile\")%>"/></h3>
     <header>
-        <h1>Welcome To Customer Dashboard </h1>
-        <h1>Username: <c:out value="<%=session.getAttribute(\"uname\")%>"/></h1>
         <a href="login.jsp?action=logout" 	class="logout-button">Logout</a>
     </header>
 
     <main>
         <div class="app-grid">
-            <a href="check-balance.jsp" class="app-link">Check Balance</a>
-            <a href="transaction-history.jsp" class="app-link">Transaction History</a>
+            <a href="customer?action=check" class="app-link">Check Balance</a>
+            <a href="customer?action=tx" class="app-link">Transaction History</a>
         </div>
+        <h2><c:out value="<%=session.getAttribute(\"bal\")%>"/></h2>
     </main>
 </body>
 </html>

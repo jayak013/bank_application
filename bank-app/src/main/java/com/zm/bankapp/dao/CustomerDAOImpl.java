@@ -94,7 +94,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 	@Override
 	public Customer getCustomerByUserName(String userName) {
 		Customer c = null;
-		String query = "select * from customer where cust_id=(select cust_id from user where user_id=?)";
+		String query = "select * from customer where cust_id=(select cust_id from bank_app.user where user_id=?)";
 		try {
 			pst = con.prepareStatement(query);
 			pst.setString(1, userName.toUpperCase());

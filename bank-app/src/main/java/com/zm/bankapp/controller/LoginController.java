@@ -42,9 +42,11 @@ import jakarta.servlet.http.HttpSession;
 					RequestDispatcher rd = request.getRequestDispatcher("admin-dashboard.jsp");
 					rd.forward(request, response);
 				} else {
-					Customer c = new CustomerServiceImpl().getCustomerByUserName(username.toUpperCase());
+					CustomerService custService = new CustomerServiceImpl();
+					AccountService accService = new AccountServiceImpl();
+					Customer c = custService.getCustomerByUserName(username.toUpperCase());
 					session.setAttribute("custName", "Customer Name: "+c.getCustName());
-					session.setAttribute("custAcc", "Account Number: "+c.getAccountNo());
+					session.setAttribute("custAcc", "Account Number: "+accService.getAccountNoByCustId(c.getCustId()));
 					session.setAttribute("custMobile", "Mobile: "+c.getMobile());
 					RequestDispatcher rd = request.getRequestDispatcher("customer-dashboard.jsp");
 					rd.forward(request, response);
