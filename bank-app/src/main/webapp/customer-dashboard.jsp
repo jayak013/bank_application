@@ -1,4 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="service" class="com.zm.bankapp.service.CustomerServiceImpl"/>
+<jsp:useBean id="accountService" class="com.zm.bankapp.service.AccountServiceImpl"/>
+<jsp:useBean id="customer" class="com.zm.bankapp.dto.Customer"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,9 +12,11 @@
     <link rel="stylesheet" href="dashboard-style.css"> 
 </head>
 <body>
-	<%if(session.getAttribute("uname")==null)
-	session.setAttribute("uname", request.getParameter("username")); 
-	%>
+	<%if(request.getParameter("username")!=null)customer =  service.getCustomerByUserName(request.getParameter("username"));%>
+        <h1>Welcome To Customer Dashboard</h1>
+        <h1><c:out value="<%=session.getAttribute("custName")%>"/></h1>
+        <h1><c:out value="<%=session.getAttribute("custAcc")%>"/></h1>
+        <h1><c:out value="<%=session.getAttribute("custMobile")%>"/></h1>
     <header>
         <h1>Welcome To Customer Dashboard </h1>
         <h1>Username: <c:out value="<%=session.getAttribute(\"uname\")%>"/></h1>

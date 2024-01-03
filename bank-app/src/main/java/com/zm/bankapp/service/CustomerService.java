@@ -7,5 +7,5 @@ public interface CustomerService {
 	int getCustomerIdByAadhaar(String Aadhaar);
 	Customer getCustomerDetailsByAccountNumber(Integer accountNumber);
 	int createAccountAndCust(Customer customer, User user);
-	
+	Customer getCustomerByUserName(String userName);
 }

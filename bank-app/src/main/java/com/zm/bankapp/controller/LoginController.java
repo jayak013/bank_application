@@ -3,6 +3,7 @@ package com.zm.bankapp.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import com.zm.bankapp.dto.Customer;
 import com.zm.bankapp.dto.User;
 import com.zm.bankapp.service.AccountService;
 import com.zm.bankapp.service.AccountServiceImpl;
@@ -41,11 +42,15 @@ import jakarta.servlet.http.HttpSession;
 					RequestDispatcher rd = request.getRequestDispatcher("admin-dashboard.jsp");
 					rd.forward(request, response);
 				} else {
+					Customer c = new CustomerServiceImpl().getCustomerByUserName(username.toUpperCase());
+					session.setAttribute("custName", "Customer Name: "+c.getCustName());
+					session.setAttribute("custAcc", "Account Number: "+c.getAccountNo());
+					session.setAttribute("custMobile", "Mobile: "+c.getMobile());
 					RequestDispatcher rd = request.getRequestDispatcher("customer-dashboard.jsp");
 					rd.forward(request, response);
 				}
 			} else {
-				request.setAttribute("error", "No Access To This website.");
+				request.setAttribute("error", "Invalid Credentials...!");
 				RequestDispatcher rd = request.getRequestDispatcher("login.jsp?login=customer");
 				rd.forward(request, response);
 			}

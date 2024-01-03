@@ -8,4 +8,5 @@ public interface CustomerDAO {
 	int getCustomerIdByAadhaar(String aadhaar);
 	Customer getCustomerDetailsByUserName(String userName);
 	Customer getCustomerByAccountNumber(Integer accountNumber);
+	Customer getCustomerByUserName(String userName);
 }

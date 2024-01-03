@@ -3,6 +3,7 @@ package com.zm.bankapp.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.zm.bankapp.config.ConnectionFactory;
@@ -46,8 +47,17 @@ public class CustomerDAOImpl implements CustomerDAO{
 
 	@Override
 	public int getCustomerIdByAadhaar(String aadhaar) {
-		// TODO Auto-generated method stub
-		return 0;
+		int id = 0;
+		String query = "select cust_id from customer where aadhaar_no=?";
+		try {
+			pst = con.prepareStatement(query);
+			pst.setString(1, aadhaar);
+			ResultSet rs = pst.executeQuery();
+			if(rs.next()) id=rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
 	}
 
 	@Override
@@ -58,8 +68,52 @@ public class CustomerDAOImpl implements CustomerDAO{
 
 	@Override
 	public Customer getCustomerByAccountNumber(Integer accountNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		Customer c = null;
+		String query = "select * from customer where cust_id=(select cust_id from account where account_no=?)";
+		try {
+			pst = con.prepareStatement(query);
+			pst.setInt(1, accountNumber);
+			ResultSet rs = pst.executeQuery();
+			if(rs.next()) {
+				int custId = rs.getInt(1);
+				String custName = rs.getString(2);
+				String gender = rs.getString(3);
+				String mobile = rs.getString(4);
+				String email = rs.getString(5);
+				String aadhaar = rs.getString(6);
+				String address = rs.getString(7);
+				Date dob = rs.getDate(8);
+				c = new Customer(custId, custName, dob.toLocalDate(), gender, mobile, email, aadhaar, address);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+
+	@Override
+	public Customer getCustomerByUserName(String userName) {
+		Customer c = null;
+		String query = "select * from customer where cust_id=(select cust_id from user where user_id=?)";
+		try {
+			pst = con.prepareStatement(query);
+			pst.setString(1, userName.toUpperCase());
+			ResultSet rs = pst.executeQuery();
+			if(rs.next()) {
+				int custId = rs.getInt(1);
+				String custName = rs.getString(2);
+				String gender = rs.getString(3);
+				String mobile = rs.getString(4);
+				String email = rs.getString(5);
+				String aadhaar = rs.getString(6);
+				String address = rs.getString(7);
+				Date dob = rs.getDate(8);
+				c = new Customer(custId, custName, dob.toLocalDate(), gender, mobile, email, aadhaar, address);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
 	}
 
 }

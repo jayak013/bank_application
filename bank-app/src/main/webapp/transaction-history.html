@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Number Form</title>
+    <link rel="stylesheet" href="tranactionHistory.css">
+</head>
+<body>
+    <h2>Enter Account Number</h2>
+    <form action="admin?action=transactionHistory" method="post">
+        <label for="account-number">Account Number:</label>
+        <input type="text" id="account-number" name="account-number"><br><br>
+        <button type="submit">Submit</button>
+        <button type="button" onclick="goBack()">Go Back</button>
+    </form>
+    <script >
+		function goBack(){
+		window.location.href = "admin-dashboard.jsp";
+	}
+	</script>
+</body>
+</html>

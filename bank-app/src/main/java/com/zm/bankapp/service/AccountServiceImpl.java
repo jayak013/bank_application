@@ -1,28 +1,34 @@
 package com.zm.bankapp.service;
 
-import java.util.List;
-
+import com.zm.bankapp.dao.AccountDAO;
+import com.zm.bankapp.dao.AccountDAOImpl;
 import com.zm.bankapp.dto.Account;
-import com.zm.bankapp.dto.BankTransaction;
 
 public class AccountServiceImpl implements AccountService{
+	public static AccountDAO dao = null;
 
+	public AccountServiceImpl() {
+		dao = new AccountDAOImpl();
+	}
+	
 	@Override
 	public int getAccountNoByCustId(Integer id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.getAccountNoByCustomerId(id);
 	}
 
 	@Override
 	public boolean validateAccountNo(Account account) {
-		// TODO Auto-generated method stub
-		return false;
+		return dao.validateAccountNo(account);
 	}
 
 	@Override
 	public double getAmount(Account account) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.getAmount(account);
+	}
+
+	@Override
+	public double getBalanceByAccountNo(Integer accountNo) {
+		return dao.getBalanceByAccountNo(accountNo);
 	}
 
 

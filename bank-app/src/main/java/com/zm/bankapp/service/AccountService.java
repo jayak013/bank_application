@@ -9,4 +9,5 @@ public interface AccountService {
 	int getAccountNoByCustId(Integer id);
 	boolean validateAccountNo(Account account);
 	double getAmount(Account account);
+	double getBalanceByAccountNo(Integer accountNo);
 }

@@ -7,15 +7,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class BankTransaction {
 	private Integer txId;
 	private LocalDate txDate;
 	private String txType;
 	private Double amount;
 	private Integer accountNo;
-	private Integer adminId;
+	//private Integer adminId;
+	private Integer senderAccountNo;
+	private Integer receiverAccountNo;
+	private Double closingBalance;
 	
 	
 

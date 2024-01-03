@@ -13,4 +13,5 @@ public interface AccountDAO {
 	int createAccount(Customer customer);
 	boolean validateAccountNo(Account account);
 	double getAmount(Account account);
+	double getBalanceByAccountNo(Integer accountNo);
 }
