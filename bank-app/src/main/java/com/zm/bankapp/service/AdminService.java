@@ -1,5 +1,7 @@
 package com.zm.bankapp.service;
 
-public interface AdminService {
+import com.zm.bankapp.dto.Admin;
 
+public interface AdminService {
+	Admin getAdminDetailsByUserName(String userName);
 }

@@ -3,10 +3,13 @@ package com.zm.bankapp.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import com.zm.bankapp.dto.Admin;
 import com.zm.bankapp.dto.Customer;
 import com.zm.bankapp.dto.User;
 import com.zm.bankapp.service.AccountService;
 import com.zm.bankapp.service.AccountServiceImpl;
+import com.zm.bankapp.service.AdminService;
+import com.zm.bankapp.service.AdminServiceImpl;
 import com.zm.bankapp.service.CustomerService;
 import com.zm.bankapp.service.CustomerServiceImpl;
 import com.zm.bankapp.service.UserService;
@@ -39,13 +42,20 @@ import jakarta.servlet.http.HttpSession;
 			String userType = userService.validateUserNameAndPassword(user).getUserType();
 			if (userType!=null) {	
 				if (userType.equalsIgnoreCase("admin")) {
+					AdminService adminService = new AdminServiceImpl();
+					Admin a = adminService.getAdminDetailsByUserName(username);
+					session.setAttribute("adminName", "Admin Name: "+a.getAdminName());
+					session.setAttribute("adminEmail", "Email: "+a.getEmail());
+					
 					RequestDispatcher rd = request.getRequestDispatcher("admin-dashboard.jsp");
+					
 					rd.forward(request, response);
 				} else {
 					CustomerService custService = new CustomerServiceImpl();
 					AccountService accService = new AccountServiceImpl();
 					Customer c = custService.getCustomerByUserName(username.toUpperCase());
 					session.setAttribute("custName", "Customer Name: "+c.getCustName());
+					session.setAttribute("onlyAcc", accService.getAccountNoByCustId(c.getCustId()));
 					session.setAttribute("custAcc", "Account Number: "+accService.getAccountNoByCustId(c.getCustId()));
 					session.setAttribute("custMobile", "Mobile: "+c.getMobile());
 					RequestDispatcher rd = request.getRequestDispatcher("customer-dashboard.jsp");

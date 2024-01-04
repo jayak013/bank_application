@@ -1,7 +1,8 @@
 package com.zm.bankapp.dao;
 
-import com.zm.bankapp.dto.User;
+import com.zm.bankapp.dto.Admin;
 
 public interface AdminDAO {
-	User getAdminDetailsByUserName(String userName);
+	
+	Admin getAdminDetailsByUserName(String userName);
 }

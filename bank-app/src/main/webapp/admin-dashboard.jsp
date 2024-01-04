@@ -13,7 +13,8 @@
 <body>
     <header>
         <h1>Welcome To Admin Dashboard </h1>
-        <h1>Username: <c:out value="<%=session.getAttribute(\"uname\")%>"/></h1>
+        <h3><c:out value="<%=session.getAttribute(\"adminName\")%>"/></h3>
+        <h3><c:out value="<%=session.getAttribute(\"adminEmail\")%>"/></h3>
         <a href="login.jsp?action=logout" 	class="logout-button">Logout</a>
     </header>
 

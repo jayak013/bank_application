@@ -22,13 +22,13 @@ public class CustomerController extends HttpServlet{
 		HttpSession session = req.getSession();
 		if(action.equalsIgnoreCase("check")) {
 			AccountServiceImpl accService = new AccountServiceImpl();
-			String acc = (String)session.getAttribute("custAcc");
-			String s = new String(acc);
-			double bal = accService.getBalanceByAccountNo(Integer.parseInt(s));
-			req.setAttribute("bal", "Account Balance is  " + bal);
+			Integer acc = (Integer)session.getAttribute("onlyAcc");
+			double bal = accService.getBalanceByAccountNo(acc);
+			session.setAttribute("bal", "Account Balance is  " + bal);
 			req.getRequestDispatcher("customer-dashboard.jsp").forward(req, resp);
 		}if(action.equalsIgnoreCase("tx")) {
 			
 		}
 	}
+	
 }
