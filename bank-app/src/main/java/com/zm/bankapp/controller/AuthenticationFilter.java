@@ -22,7 +22,7 @@ public class AuthenticationFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse)response;
 		HttpSession session = req.getSession();
-		if(!(req.getRequestURI().endsWith("welcome.html")||req.getRequestURI().endsWith("welcome")||req.getRequestURI().endsWith("login.jsp"))) {
+		if(!(req.getRequestURI().endsWith("welcome.html")||req.getRequestURI().endsWith("welcome")||req.getRequestURI().endsWith("login.jsp")||req.getRequestURI().endsWith("login"))) {
 			if(session.getAttribute("page")==null) res.sendRedirect("welcome.html");
 			else chain.doFilter(req, res);
 		}else {
